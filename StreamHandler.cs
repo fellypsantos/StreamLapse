@@ -81,7 +81,12 @@ namespace StreamLapse
 
             string filenameFullPath = GenerateImageNameOutputPath(filename);
 
-            if (File.Exists(filenameFullPath)) throw new IOException($"Failed to save image {filenameFullPath} because it already exists.");
+            if (File.Exists(filenameFullPath))
+            {
+                Console.WriteLine($"{filename} already existis! Skipping...");
+
+                return;
+            }
 
             stopwatch.Start();
 
