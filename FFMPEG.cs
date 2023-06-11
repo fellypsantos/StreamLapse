@@ -16,8 +16,6 @@ namespace StreamLapse
             {
                 p.StartInfo.UseShellExecute = false;
                 p.StartInfo.CreateNoWindow = true;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.StartInfo.RedirectStandardError = true;
                 p.StartInfo.FileName = "ffmpeg.exe";
                 p.StartInfo.Arguments = $"-loglevel quiet -rtsp_transport tcp -i {streamURL} -vframes 1 {filenameFullPath}";
                 p.Start();
