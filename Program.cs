@@ -1,6 +1,5 @@
 ﻿using CommandLine;
 using System;
-using System.IO;
 
 namespace StreamLapse
 {
@@ -15,7 +14,7 @@ namespace StreamLapse
                 Parser.Default.ParseArguments<Options>(args).WithParsed(RunOptions);
             }
 
-            catch (Exception ex) when (ex is FormatException || ex is IOException)
+            catch (Exception ex) when (ex is FormatException)
             {
                 Console.WriteLine(ex.Message);
             }

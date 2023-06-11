@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace StreamLapse
 {
@@ -14,6 +13,8 @@ namespace StreamLapse
         private int _frameCount;
         private int _captureIntervalInMilliseconds;
         private long _totalBytesWrited;
+
+        const byte MAX_RETRIES_TO_SAVE_FRAME = 5;
 
         /// <summary>
         /// Handle connection to a camera stream.
@@ -81,17 +82,36 @@ namespace StreamLapse
 
             string filenameFullPath = GenerateImageNameOutputPath(filename);
 
-            if (File.Exists(filenameFullPath)) throw new IOException($"Failed to save image {filenameFullPath} because it already exists.");
+            if (File.Exists(filenameFullPath))
+            {
+                Console.WriteLine($"{filename} already existis! Skipping...");
+
+                return;
+            }
 
             stopwatch.Start();
 
             bool frameWasSaved = false;
 
-            while(!frameWasSaved)
+            byte retries = 0;
+
+            while (!frameWasSaved && retries < MAX_RETRIES_TO_SAVE_FRAME)
             {
                 frameWasSaved = FFMPEG.CaptureStreamFrame(_streamURL, filenameFullPath);
 
-                if (!frameWasSaved) Console.WriteLine($"Failed to save the frame: {filename}. Retrying...");
+                if (!frameWasSaved)
+                {
+                    Console.WriteLine($"Failed to save the frame: {filename}. Retrying {++retries}/{MAX_RETRIES_TO_SAVE_FRAME}...");
+                }
+            }
+
+            if (!frameWasSaved)
+            {
+                Console.WriteLine($"\nFailed to save the frame: {filename}. Decrementing the index to next try...");
+
+                _frameCount--;
+
+                return;
             }
 
             stopwatch.Stop();
@@ -135,9 +155,9 @@ namespace StreamLapse
 
             Console.WriteLine($"File {filename} saved in {timeSpent} seconds.\n");
 
-            Console.WriteLine("Total frames saved at now: " + _frameCount + '\n');
+            Console.WriteLine("Total bytes writed in this session: " + FormatFileSize(_totalBytesWrited) + '\n');
 
-            Console.WriteLine("Total filesize of images: " + FormatFileSize(_totalBytesWrited));
+            Console.WriteLine("Total frames saved: " + _frameCount);
         }
 
         /// <summary>
