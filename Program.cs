@@ -1,6 +1,5 @@
 ﻿using CommandLine;
 using System;
-using System.IO;
 
 namespace StreamLapse
 {
