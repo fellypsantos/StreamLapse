@@ -1,3 +1,29 @@
+<p align="center">
+  <img src="https://github.com/fellypsantos/StreamLapse/assets/11094932/fc9a8212-6f4c-482d-b480-5a0a8b86f98a" width="100">
+</p>
+<h1 align="center">StreamLapse</h1>
+
+<p align="center">
+  See the world from different perspective, creating timelapse videos with your IP camera.
+</p>
+
+<p align="center">
+  <a href="https://github.com/fellypsantos/StreamLapse/releases">
+    <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/fellypsantos/StreamLapse/total">
+    <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/fellypsantos/StreamLapse?include_prereleases">
+    <img src="https://img.shields.io/github/repo-size/fellypsantos/StreamLapse" />
+  </a>
+  <!--<a alt="Buy ma a coffee" href="">
+    <img alt="Patreon" src="https://img.shields.io/badge/donate-patreon-%23E85B46">
+  </a>-->
+</p>
+
+<h2 align="center">Install</h2>
+<p align="center">
+  Uses <a href="https://dotnet.microsoft.com/download/dotnet-framework/net472">.Net 4.7.2</a> | <a href="https://github.com/fellypsantos/StreamLapse/releases">Download</a><br><br>
+  <img src="https://github.com/fellypsantos/StreamLapse/assets/11094932/0825d1e1-5b4c-428c-aba2-3320588661fb">
+</p>
+
 # StreamLapse
 
 Command line tools to extract one frame from rtsp stream each given interval using FFMPEG.
